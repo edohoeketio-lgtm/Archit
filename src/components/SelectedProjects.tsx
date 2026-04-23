@@ -190,8 +190,8 @@ export default function SelectedProjects() {
         <h2 className="text-sm uppercase tracking-widest text-[#141414]/70">Selected Works</h2>
       </div>
 
-      {/* The Pinned Interactive Section */}
-      <section ref={sectionRef} id="projects" className="h-screen w-full flex flex-col relative overflow-hidden bg-[#F5F2EB]">
+      {/* The Pinned Interactive Section (Desktop Only) */}
+      <section ref={sectionRef} id="projects" className="h-screen w-full hidden md:flex flex-col relative overflow-hidden bg-[#F5F2EB]">
         
         {/* Top Half: Editorial Typography */}
         <div className="flex-1 relative w-full pt-16 md:pt-24 h-1/2 overflow-hidden">
@@ -255,6 +255,33 @@ export default function SelectedProjects() {
           </div>
         </div>
         
+      </section>
+
+      {/* Mobile Native Layout (Vertical Stack) */}
+      <section className="flex flex-col md:hidden w-full bg-[#F5F2EB] px-6 py-12 gap-16">
+        {projects.map((project, index) => (
+          <div key={`mobile-${project.id}`} className="flex flex-col gap-6">
+            <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden border border-[#141414]/5">
+              <Image 
+                src={project.img1} 
+                alt={`${project.name} Image 1`} 
+                fill 
+                className="object-cover" 
+                sizes="100vw"
+              />
+            </div>
+            <div className="flex flex-col gap-4 pt-2">
+              <h3 className="text-5xl font-medium tracking-tighter leading-[0.9] text-[#141414]">{project.name}</h3>
+              <p className="text-lg font-light text-[#141414]/70 leading-relaxed mb-2">
+                {project.description}
+              </p>
+              <button className="group flex items-center gap-3 text-sm uppercase tracking-widest font-semibold text-[#141414] hover:text-[#0A3B24] transition-colors self-start pb-2 border-b-2 border-[#141414] hover:border-[#0A3B24]">
+                See available projects 
+                <span className="text-lg transform group-hover:translate-x-2 transition-transform duration-300">→</span>
+              </button>
+            </div>
+          </div>
+        ))}
       </section>
     </div>
   );

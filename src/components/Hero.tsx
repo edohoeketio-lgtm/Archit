@@ -131,7 +131,7 @@ export default function Hero() {
   return (
     <div ref={outerWrapperRef} className="relative w-full">
       {/* Layer 4: Fixed Navigation & Logo (Moved OUTSIDE the pinned section so it stays forever) */}
-      <div className="fixed top-0 left-0 w-full h-screen z-50 flex flex-col justify-between p-6 md:p-12 lg:p-24 pointer-events-none">
+      <div className="fixed top-0 left-0 w-full h-[100dvh] z-50 flex flex-col justify-between p-6 md:p-12 lg:p-24 pointer-events-none">
         <nav className="flex justify-between items-start text-sm uppercase tracking-widest pointer-events-auto">
           <div id="global-logo-wrapper" className="relative w-24 h-24 md:w-28 md:h-28 overflow-hidden">
             <div 
@@ -154,7 +154,7 @@ export default function Hero() {
 
       <section 
         ref={sectionRef}
-        className="relative w-full h-screen overflow-hidden visibility-hidden bg-[#F2F0E9]"
+        className="relative w-full h-[100dvh] overflow-hidden visibility-hidden bg-[#F2F0E9]"
       >
         {/* Layer 1: Hero Image Background */}
         <div ref={imageLayerRef} className="absolute inset-0 z-0 origin-center">
@@ -234,7 +234,7 @@ export default function Hero() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-[#0A3B24]/30 text-[#0A3B24]">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-8 border-t border-[#0A3B24]/30 text-[#0A3B24]">
                 <div className="stat-item">
                   <span className="block text-3xl font-light mb-2">24</span>
                   <span className="text-xs uppercase tracking-widest text-[#0A3B24]/70">Years of Practice</span>

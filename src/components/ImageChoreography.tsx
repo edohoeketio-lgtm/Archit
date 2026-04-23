@@ -175,7 +175,8 @@ export default function ImageChoreography() {
 
   return (
     <div className="relative w-full">
-      <section ref={sectionRef} className="relative h-screen w-full bg-arch-charcoal overflow-hidden flex items-center justify-center">
+      {/* Desktop GSAP Choreography */}
+      <section ref={sectionRef} className="relative h-[100dvh] w-full bg-arch-charcoal overflow-hidden hidden md:flex items-center justify-center">
         
         {/* Stage Container */}
         <div ref={containerRef} className="relative w-full h-full flex items-center justify-center">
@@ -239,6 +240,43 @@ export default function ImageChoreography() {
             </button>
           </div>
 
+        </div>
+      </section>
+
+      {/* Mobile Native Carousel */}
+      <section className="md:hidden w-full h-[100dvh] bg-arch-charcoal flex flex-col relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full p-6 z-20 flex flex-col pt-12 bg-gradient-to-b from-black/60 to-transparent">
+          <h2 className="text-xl font-light tracking-tight text-white">NEUE NATIONALGALERIE EXPANSION</h2>
+          <p className="text-xs opacity-70 uppercase tracking-widest mt-1 text-white">Berlin, DE</p>
+        </div>
+
+        <div 
+          className="flex w-full h-full overflow-x-auto snap-x snap-mandatory scroll-smooth relative z-10 [&::-webkit-scrollbar]:hidden"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {KUNSTHAUS_IMAGES.map((src, index) => (
+            <div key={`mobile-carousel-${index}`} className="w-full h-full flex-none snap-center relative">
+              <Image
+                src={src}
+                alt={`Kunsthaus Reference ${index + 1}`}
+                fill
+                sizes="100vw"
+                quality={75}
+                className="object-cover"
+                priority={index === 0}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Swipe Hint */}
+        <div className="absolute bottom-12 w-full flex justify-center pointer-events-none z-20">
+          <div className="bg-black/30 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-xs uppercase tracking-widest flex items-center gap-2">
+            <span>Swipe</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </div>
         </div>
       </section>
     </div>
