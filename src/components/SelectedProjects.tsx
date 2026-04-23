@@ -42,17 +42,18 @@ export default function SelectedProjects() {
     // Logo Exit Animation
     const logoWrapper = document.querySelector("#global-logo-wrapper");
     let logoExitAnim: gsap.core.Tween | undefined;
-    if (logoWrapper) {
-      logoExitAnim = gsap.to(logoWrapper, {
+    if (logoWrapper && logoWrapper.children.length > 0) {
+      // Animate the children out so they get clipped by the wrapper's overflow-hidden
+      // This perfectly matches the slide-in behavior from the hero section
+      logoExitAnim = gsap.to(logoWrapper.children, {
         scrollTrigger: {
           trigger: "#selected-works-buffer",
           start: "top center",
           toggleActions: "play none none reverse",
         },
-        xPercent: -150,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power2.inOut"
+        xPercent: -105,
+        duration: 0.8,
+        ease: "power3.inOut"
       });
     }
 
