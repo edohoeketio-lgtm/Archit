@@ -24,139 +24,133 @@ export default function Hero() {
   const line3Ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    // 1. Initial Load Animation
-    gsap.set(sectionRef.current, { visibility: "visible" });
-    
-    // Animate the image tag itself for the load-in, to avoid conflicting with the scrub timeline
-    const imgEl = imageLayerRef.current?.querySelector("img");
-    if (imgEl) {
-      gsap.fromTo(
-        imgEl,
-        { scale: 1.1, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 2, ease: "power3.out" }
-      );
-    }
+    // Wrap everything in gsap.context for proper cleanup of ScrollTriggers and DOM manipulations (like pin-spacers)
+    const ctx = gsap.context(() => {
+      // 1. Initial Load Animation
+      gsap.set(sectionRef.current, { visibility: "visible" });
+      
+      // Animate the image tag itself for the load-in, to avoid conflicting with the scrub timeline
+      const imgEl = imageLayerRef.current?.querySelector("img");
+      if (imgEl) {
+        gsap.fromTo(
+          imgEl,
+          { scale: 1.1, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 2, ease: "power3.out" }
+        );
+      }
 
-    // 2. Setup initial position for the yellow overlay
-    const updateGeometry = () => {
-      if (!logoBoxRef.current || !yellowOverlayRef.current || !sectionRef.current) return;
-      
-      const logoRect = logoBoxRef.current.getBoundingClientRect();
-      const sectionRect = sectionRef.current.getBoundingClientRect();
-      
-      // Calculate position relative to the pinned section to avoid scroll offset bugs
-      const relativeTop = logoRect.top - sectionRect.top;
-      const relativeLeft = logoRect.left - sectionRect.left;
-      
-      // The yellow overlay perfectly covers the logo box initially
-      gsap.set(yellowOverlayRef.current, {
-        top: relativeTop,
-        left: relativeLeft,
-        width: logoRect.width,
-        height: logoRect.height,
-        opacity: 1, // Ensure it's visible
-      });
-      
-      // Remove native background from logo so the overlay entirely provides the color
-      gsap.set(logoBoxRef.current, { 
-        backgroundColor: "transparent", 
-        boxShadow: "none" 
-      });
-
+      // 2. Initial Setup
       // Hide the green logo initially outside the visible area
       gsap.set(greenLogoRef.current, { xPercent: -100 });
-    };
 
-    // Set initial geometry immediately so tl.to() records the correct starting values
-    updateGeometry();
-
-    // 3. ScrollTrigger Sequence
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=300%", // Extended for the multi-phase one-viewport sequence
-        pin: true,
-        scrub: 1, // Slight smoothing on the scrub
-        invalidateOnRefresh: true, // Recalculate on resize
-        onRefreshInit: updateGeometry, // Remeasure BEFORE ScrollTrigger records start values
-      }
-    });
-
-    // Ensure layout is perfectly measured after custom fonts finish loading
-    if (document.fonts) {
-      document.fonts.ready.then(() => {
-        ScrollTrigger.refresh();
+      // 3. ScrollTrigger Sequence
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=300%", // Extended for the multi-phase one-viewport sequence
+          pin: true,
+          scrub: 1, // Slight smoothing on the scrub
+          invalidateOnRefresh: true, // Recalculate on resize
+        }
       });
-    }
 
-    // Expand yellow overlay to full screen
-    tl.to(yellowOverlayRef.current, {
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      ease: "power2.inOut",
-    }, 0);
+      // Ensure layout is perfectly measured after custom fonts finish loading
+      if (document.fonts) {
+        document.fonts.ready.then(() => {
+          ScrollTrigger.refresh();
+        });
+      }
 
-    // Slide hero image away (targets the outer wrapper)
-    // Image remains opaque as requested
-    tl.to(imageLayerRef.current, {
-      y: "-30vh",
-      ease: "power2.inOut",
-    }, 0);
+      // Expand yellow overlay to full screen
+      tl.to(yellowOverlayRef.current, {
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        ease: "power2.inOut",
+      }, 0);
 
-    // Fade out scroll indicator
-    tl.to(scrollIndicatorRef.current, {
-      opacity: 0,
-      ease: "power2.inOut",
-    }, 0);
+      // Slide hero image away (targets the outer wrapper)
+      // Image remains opaque as requested
+      tl.to(imageLayerRef.current, {
+        y: "-30vh",
+        ease: "power2.inOut",
+      }, 0);
 
-    // Masked Typography Reveal with fade in
-    tl.to([line1Ref.current, line2Ref.current, line3Ref.current], {
-      y: "0%",
-      opacity: 1,
-      stagger: 0.1,
-      ease: "power3.out",
-    }, 0.2); // Start slightly after the expansion begins
+      // Fade out scroll indicator
+      tl.to(scrollIndicatorRef.current, {
+        opacity: 0,
+        ease: "power2.inOut",
+      }, 0);
 
-    // Original logo gracefully disappears immediately as yellow starts expanding
-    tl.to(logoBoxRef.current, {
-      opacity: 0,
-      ease: "power2.out"
-    }, 0);
+      // Masked Typography Reveal with fade in
+      tl.to([line1Ref.current, line2Ref.current, line3Ref.current], {
+        y: "0%",
+        opacity: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+      }, 0.2); // Start slightly after the expansion begins
 
-    // Green logo slides in from the left simultaneously
-    tl.fromTo(greenLogoRef.current, 
-      { xPercent: -100 },
-      {
-        xPercent: 0,
-        ease: "power3.inOut"
-      }, 
-      0.3
-    );
+      // Original logo gracefully disappears immediately as yellow starts expanding
+      tl.to(logoBoxRef.current, {
+        opacity: 0,
+        ease: "power2.out"
+      }, 0);
 
-    // Phase 4: Scroll the old text up, bring the philosophy text up
-    tl.to(heroLayerRef.current, {
-      y: "-100vh",
-      ease: "power2.inOut",
-      duration: 1,
-    }, 1.5); // Start at 1.5 to provide a scrolling "pause" to read the text
+      // Green logo slides in from the left simultaneously
+      tl.fromTo(greenLogoRef.current, 
+        { xPercent: -100 },
+        {
+          xPercent: 0,
+          ease: "power3.inOut"
+        }, 
+        0.3
+      );
 
-    tl.to(philosophyLayerRef.current, {
-      y: "0vh",
-      ease: "power2.inOut",
-      duration: 1,
-    }, 1.5);
+      // Phase 4: Scroll the old text up, bring the philosophy text up
+      tl.to(heroLayerRef.current, {
+        y: "-100vh",
+        ease: "power2.inOut",
+        duration: 1.5,
+      }, 0.8); // Reduced pause from 1.5 to 0.8 so it doesn't feel stuck
 
-    return () => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
+      tl.to(philosophyLayerRef.current, {
+        y: "0vh",
+        ease: "power2.inOut",
+        duration: 1.5,
+      }, 0.8);
+
+    }, outerWrapperRef);
+
+    return () => ctx.revert();
+
   }, []);
 
   return (
     <div ref={outerWrapperRef} className="relative w-full">
+      {/* Layer 4: Fixed Navigation & Logo (Moved OUTSIDE the pinned section so it stays forever) */}
+      <div className="fixed top-0 left-0 w-full h-screen z-50 flex flex-col justify-between p-6 md:p-12 lg:p-24 pointer-events-none">
+        <nav className="flex justify-between items-start text-sm uppercase tracking-widest pointer-events-auto">
+          <div className="relative w-24 h-24 md:w-28 md:h-28 overflow-hidden">
+            <div 
+              ref={logoBoxRef}
+              className="absolute inset-0 bg-[#E5D223] text-[#0A3B24] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight"
+            >
+              <span>the</span>
+              <span>yard</span>
+            </div>
+            <div 
+              ref={greenLogoRef}
+              className="absolute inset-0 bg-[#0A3B24] text-[#E5D223] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight"
+            >
+              <span>the</span>
+              <span>yard</span>
+            </div>
+          </div>
+        </nav>
+      </div>
+
       <section 
         ref={sectionRef}
         className="relative w-full h-screen overflow-hidden visibility-hidden bg-[#F2F0E9]"
@@ -176,8 +170,7 @@ export default function Hero() {
         {/* Layer 2: The Expanding Yellow Overlay */}
         <div 
           ref={yellowOverlayRef}
-          className="absolute bg-[#E5D223] z-10 pointer-events-none will-change-transform"
-          style={{ width: 0, height: 0 }}
+          className="absolute bg-[#E5D223] z-10 pointer-events-none will-change-transform top-6 left-6 w-24 h-24 md:top-12 md:left-12 md:w-28 md:h-28 lg:top-24 lg:left-24 lg:w-28 lg:h-28"
         />
 
         {/* Layer 3: The Intro Typography */}
@@ -225,7 +218,7 @@ export default function Hero() {
           <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 pointer-events-auto">
             {/* Left Column: Heading */}
             <div className="lg:col-span-4">
-              <h2 className="text-sm uppercase tracking-widest text-[#0A3B24]/70 mb-4">Introduction to the yard</h2>
+              <h2 className="text-sm uppercase tracking-widest text-[#0A3B24]/70 mb-4 lg:mt-2">Introduction to the yard</h2>
               <div className="h-px w-12 bg-[#0A3B24] mb-8"></div>
             </div>
 
@@ -262,29 +255,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Layer 4: Fixed Navigation & Logo */}
-        <div className="fixed top-0 left-0 w-full h-screen z-50 flex flex-col justify-between p-6 md:p-12 lg:p-24 pointer-events-none">
-          <nav className="flex justify-between items-start text-sm uppercase tracking-widest pointer-events-auto">
-            {/* "the yard" logo block wrapped for sliding */}
-            <div className="relative w-24 h-24 md:w-28 md:h-28 overflow-hidden">
-              <div 
-                ref={logoBoxRef}
-                // The native background is removed by JS instantly, replaced by the expanding layer underneath
-                className="absolute inset-0 bg-[#E5D223] text-[#141414] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight"
-              >
-                <span>the</span>
-                <span>yard</span>
-              </div>
-              <div 
-                ref={greenLogoRef}
-                className="absolute inset-0 bg-[#0A3B24] text-[#E5D223] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight"
-              >
-                <span>the</span>
-                <span>yard</span>
-              </div>
-            </div>
-          </nav>
-        </div>
       </section>
     </div>
   );
