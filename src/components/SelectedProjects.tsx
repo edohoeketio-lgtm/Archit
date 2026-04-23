@@ -80,9 +80,18 @@ export default function SelectedProjects() {
 
         const isEven = i % 2 === 0;
         
-        // Hide all except the first one
-        gsap.set(group, { autoAlpha: i === 0 ? 1 : 0 });
-        gsap.set(texts[i] as Element, { autoAlpha: i === 0 ? 1 : 0 });
+        // Hide all except the first one initially via clipPath (instead of opacity)
+        // Ensure they overlap each other perfectly
+        gsap.set(group, { 
+          zIndex: i,
+          clipPath: i === 0 ? "inset(0% 0% 0% 0%)" : "inset(100% 0% 0% 0%)",
+          opacity: 1 // Keep fully opaque so it reveals smoothly
+        });
+        
+        gsap.set(texts[i] as Element, { 
+          yPercent: i === 0 ? 0 : 100, 
+          autoAlpha: i === 0 ? 1 : 0 
+        });
         
         // Even indices start with Left big, Right small
         // Odd indices start with Left small, Right big
@@ -106,6 +115,9 @@ export default function SelectedProjects() {
         const leftImg = currentGroup.querySelector(".inner-img-left");
         const rightImg = currentGroup.querySelector(".inner-img-right");
         
+        const nextLeftImg = nextGroup.querySelector(".inner-img-left");
+        const nextRightImg = nextGroup.querySelector(".inner-img-right");
+        
         const isEven = i % 2 === 0;
         const targetLeftWidth = isEven ? "35%" : "65%";
         const targetRightWidth = isEven ? "65%" : "35%";
@@ -120,13 +132,32 @@ export default function SelectedProjects() {
           .to(leftImg, { scale: targetLeftScale, duration: 1, ease: "power2.inOut" }, startTime)
           .to(rightImg, { scale: targetRightScale, duration: 1, ease: "power2.inOut" }, startTime);
           
-        // 2. Crossfade to Next Project
-        // We pause slightly before crossfading
-        const crossfadeTime = startTime + 1.2;
-        tl.to(currentGroup, { autoAlpha: 0, duration: 0.6, ease: "power2.inOut" }, crossfadeTime)
-          .to(currentText, { autoAlpha: 0, duration: 0.6, ease: "power2.inOut" }, crossfadeTime)
-          .to(nextGroup, { autoAlpha: 1, duration: 0.6, ease: "power2.inOut" }, crossfadeTime)
-          .to(nextText, { autoAlpha: 1, duration: 0.6, ease: "power2.inOut" }, crossfadeTime);
+        // 2. Slide Up the Next Project (Both Text and Images)
+        const slideTime = startTime + 1.2;
+        
+        // Text Slide Animation
+        tl.to(currentText, { yPercent: -100, autoAlpha: 0, duration: 1, ease: "power2.inOut" }, slideTime)
+          .to(nextText, { yPercent: 0, autoAlpha: 1, duration: 1, ease: "power2.inOut" }, slideTime);
+          
+        // Image Reveal Animation (Clip Path from bottom up)
+        tl.fromTo(nextGroup, 
+            { clipPath: "inset(100% 0% 0% 0%)" }, 
+            { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "power2.inOut" }, 
+            slideTime
+        );
+        
+        // Parallax push on the images inside the cards
+        tl.fromTo([nextLeftImg, nextRightImg],
+            { yPercent: 20 },
+            { yPercent: 0, duration: 1, ease: "power2.inOut" },
+            slideTime
+        );
+        
+        // Subtle push up on the current images being covered
+        tl.to([leftImg, rightImg],
+            { yPercent: -20, duration: 1, ease: "power2.inOut" },
+            slideTime
+        );
       }
 
       return () => {
@@ -154,12 +185,12 @@ export default function SelectedProjects() {
       <section ref={sectionRef} id="projects" className="h-screen w-full flex flex-col relative overflow-hidden bg-[#F5F2EB]">
         
         {/* Top Half: Editorial Typography */}
-        <div className="flex-1 relative w-full pt-16 md:pt-24 h-1/2">
+        <div className="flex-1 relative w-full pt-16 md:pt-24 h-1/2 overflow-hidden">
           {projects.map((project, index) => (
             <div 
               key={`text-${project.id}`} 
               className="text-project absolute inset-0 px-6 md:px-12 lg:px-24 pt-16 md:pt-24 grid grid-cols-1 md:grid-cols-12 gap-8" 
-              style={{ opacity: index === 0 ? 1 : 0, pointerEvents: index === 0 ? 'auto' : 'none' }}
+              style={{ opacity: index === 0 ? 1 : 0, pointerEvents: index === 0 ? 'auto' : 'none', transform: index === 0 ? "translateY(0)" : "translateY(100%)" }}
             >
               <div className="md:col-span-7">
                 <h3 className="text-5xl md:text-7xl lg:text-[7rem] font-medium tracking-tighter leading-[0.9] text-[#141414]">{project.name}</h3>
