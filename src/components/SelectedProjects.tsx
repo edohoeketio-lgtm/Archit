@@ -222,7 +222,7 @@ export default function SelectedProjects() {
             {/* Master Left Image Card */}
             <div className="master-card-left relative h-full rounded-lg overflow-hidden will-change-[width] border border-[#141414]/5" style={{ transform: "translateZ(0)" }}>
               {projects.map((project, index) => (
-                <div key={`left-img-${project.id}`} className="left-image-wrapper absolute inset-0 will-change-transform">
+                <div key={`left-img-${project.id}`} className="left-image-wrapper absolute inset-0 overflow-hidden will-change-transform">
                   <Image 
                     src={project.img1} 
                     alt={`${project.name} Image 1`} 
@@ -238,7 +238,7 @@ export default function SelectedProjects() {
             {/* Master Right Image Card */}
             <div className="master-card-right relative h-full rounded-lg overflow-hidden will-change-[width] border border-[#141414]/5" style={{ transform: "translateZ(0)" }}>
               {projects.map((project, index) => (
-                <div key={`right-img-${project.id}`} className="right-image-wrapper absolute inset-0 will-change-transform">
+                <div key={`right-img-${project.id}`} className="right-image-wrapper absolute inset-0 overflow-hidden will-change-transform">
                   <Image 
                     src={project.img2} 
                     alt={`${project.name} Image 2`} 
