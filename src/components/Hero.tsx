@@ -133,7 +133,7 @@ export default function Hero() {
       {/* Layer 4: Fixed Navigation & Logo (Moved OUTSIDE the pinned section so it stays forever) */}
       <div className="fixed top-0 left-0 w-full h-screen z-50 flex flex-col justify-between p-6 md:p-12 lg:p-24 pointer-events-none">
         <nav className="flex justify-between items-start text-sm uppercase tracking-widest pointer-events-auto">
-          <div className="relative w-24 h-24 md:w-28 md:h-28 overflow-hidden">
+          <div id="global-logo-wrapper" className="relative w-24 h-24 md:w-28 md:h-28 overflow-hidden">
             <div 
               ref={logoBoxRef}
               className="absolute inset-0 bg-[#E5D223] text-[#0A3B24] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight"

@@ -39,6 +39,23 @@ export default function SelectedProjects() {
 
     let mm = gsap.matchMedia();
 
+    // Logo Exit Animation
+    const logoWrapper = document.querySelector("#global-logo-wrapper");
+    let logoExitAnim: gsap.core.Tween | undefined;
+    if (logoWrapper) {
+      logoExitAnim = gsap.to(logoWrapper, {
+        scrollTrigger: {
+          trigger: "#selected-works-buffer",
+          start: "top center",
+          toggleActions: "play none none reverse",
+        },
+        xPercent: -150,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.inOut"
+      });
+    }
+
     mm.add("(min-width: 768px)", () => {
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -119,6 +136,9 @@ export default function SelectedProjects() {
 
     return () => {
       mm.revert();
+      if (logoExitAnim) {
+        logoExitAnim.kill();
+      }
     };
   }, []);
 
@@ -126,7 +146,7 @@ export default function SelectedProjects() {
     <div className="bg-[#F5F2EB] text-[#141414] w-full">
       
       {/* The Breathing Buffer - A stark palette cleanser after Kunsthaus */}
-      <div className="h-[40vh] md:h-[50vh] flex items-center justify-center border-b border-[#141414]/10">
+      <div id="selected-works-buffer" className="h-[40vh] md:h-[50vh] flex items-center justify-center border-b border-[#141414]/10">
         <h2 className="text-sm uppercase tracking-widest text-[#141414]/70">Selected Works</h2>
       </div>
 
