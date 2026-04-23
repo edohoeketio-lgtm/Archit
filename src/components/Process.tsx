@@ -56,7 +56,7 @@ export default function Process() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-stone">
+    <section ref={sectionRef} className="w-full py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-stone text-charcoal">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 lg:gap-12 items-start">
         
         <div className="md:col-span-5 sticky top-32">
@@ -77,8 +77,8 @@ export default function Process() {
             {processSteps.map((step, index) => (
               <div key={index} className="process-step border-l border-charcoal/20 pl-8 relative">
                 <span className="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-charcoal rounded-full"></span>
-                <span className="block text-xs uppercase tracking-widest text-concrete mb-4">Phase 0{index + 1}</span>
-                <h3 className="text-2xl font-light mb-4">{step.title}</h3>
+                <span className="block text-xs uppercase tracking-widest text-charcoal/50 mb-4">Phase 0{index + 1}</span>
+                <h3 className="text-2xl font-light mb-4 text-charcoal">{step.title}</h3>
                 <p className="font-light text-charcoal/80 leading-relaxed max-w-md">
                   {step.description}
                 </p>
