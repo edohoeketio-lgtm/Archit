@@ -39,6 +39,18 @@ export default function ImageChoreography() {
           scrub: 1,
           pin: true,
           anticipatePin: 1,
+          onLeave: () => {
+            const logoWrapper = document.querySelector("#global-logo-wrapper");
+            if (logoWrapper && logoWrapper.children.length > 0) {
+              gsap.to(logoWrapper.children, { xPercent: -105, duration: 0.8, ease: "power3.inOut", overwrite: "auto" });
+            }
+          },
+          onEnterBack: () => {
+            const logoWrapper = document.querySelector("#global-logo-wrapper");
+            if (logoWrapper && logoWrapper.children.length > 0) {
+              gsap.to(logoWrapper.children, { xPercent: 0, duration: 0.8, ease: "power3.inOut", overwrite: "auto" });
+            }
+          }
         },
       });
 
