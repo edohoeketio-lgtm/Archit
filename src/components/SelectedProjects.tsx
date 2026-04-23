@@ -25,7 +25,7 @@ const projects = [
     name: "Oculus Pavilion",
     description: "A subterranean exhibition space defined by a single, monumental concrete oculus. It fractures the earth to frame the sky, grounding visitors in deep, earth-cast brutalism while preserving the natural topography perfectly untouched above.",
     img1: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2000&auto=format&fit=crop",
-    img2: "https://images.unsplash.com/photo-1506812584065-22d713c825a0?q=80&w=2000&auto=format&fit=crop",
+    img2: "https://images.unsplash.com/photo-1600607687126-8a3414349a51?q=80&w=2000&auto=format&fit=crop",
   }
 ];
 
