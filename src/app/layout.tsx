@@ -14,8 +14,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Architecture Portfolio",
-  description: "A premium, architecture-first website for a contemporary architectural firm.",
+  title: {
+    default: "The Yard Studio | Architectural Precision",
+    template: "%s | The Yard Studio"
+  },
+  description: "Defining spatial paradigms in the heart of Europe. We engineer spatial narratives through brutalist monumentality and intimate, crafted scale.",
+  keywords: ["Architecture", "Design Studio", "Brutalism", "Urban Masterplanning", "Berlin", "Milan", "Spatial Strategy"],
+  authors: [{ name: "The Yard Studio" }],
+  creator: "The Yard Studio",
+  openGraph: {
+    type: "website",
+    locale: "en_IE",
+    url: "https://theyard.studio",
+    title: "The Yard Studio",
+    description: "Architectural Precision Meets Radical Production.",
+    siteName: "The Yard Studio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Yard Studio | Architectural Precision",
+    description: "Defining spatial paradigms in the heart of Europe.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export default function RootLayout({
