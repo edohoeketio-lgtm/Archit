@@ -10,8 +10,8 @@ const projects = [
     id: 1,
     name: "La Roche-en-Ardenne",
     description: "A brutalist intervention within a bucolic valley. The structure anchors itself into the bedrock, using monolithic local stone and raw concrete to create a dialogue between medieval history and unapologetic modernism. Light is weaponized to carve spatial hierarchies across the riverfront.",
-    img1: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2000&auto=format&fit=crop",
-    img2: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop",
+    img1: "/media/roshe/behance_ref_01.jpg",
+    img2: "/media/roshe/behance_ref_13.jpg",
   },
   {
     id: 2,
@@ -24,8 +24,8 @@ const projects = [
     id: 3,
     name: "Oculus Pavilion",
     description: "A subterranean exhibition space defined by a single, monumental concrete oculus. It fractures the earth to frame the sky, grounding visitors in deep, earth-cast brutalism while preserving the natural topography perfectly untouched above.",
-    img1: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2000&auto=format&fit=crop",
-    img2: "https://images.unsplash.com/photo-1600607687126-8a3414349a51?q=80&w=2000&auto=format&fit=crop",
+    img1: "/media/oculus/img1.png",
+    img2: "/media/oculus/img2.png",
   }
 ];
 
