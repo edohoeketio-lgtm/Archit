@@ -37,10 +37,10 @@ export default function Image() {
           }}
         >
           <div style={{ fontSize: 220, fontWeight: 800, lineHeight: 0.85, letterSpacing: '-0.05em' }}>
-            the
+            THE
           </div>
           <div style={{ fontSize: 220, fontWeight: 800, lineHeight: 0.85, letterSpacing: '-0.05em' }}>
-            yard
+            YARD
           </div>
         </div>
       </div>

@@ -138,15 +138,15 @@ export default function Hero() {
               ref={logoBoxRef}
               className="absolute inset-0 bg-[#E5D223] text-[#0A3B24] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight"
             >
-              <span>the</span>
-              <span>yard</span>
+              <span>THE</span>
+              <span>YARD</span>
             </div>
             <div 
               ref={greenLogoRef}
               className="absolute inset-0 bg-[#0A3B24] text-[#E5D223] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight"
             >
-              <span>the</span>
-              <span>yard</span>
+              <span>THE</span>
+              <span>YARD</span>
             </div>
           </div>
         </nav>

@@ -25,10 +25,10 @@ export default function Icon() {
         }}
       >
         <div style={{ fontSize: 160, fontWeight: 800, lineHeight: 0.85, letterSpacing: '-0.05em' }}>
-          the
+          THE
         </div>
         <div style={{ fontSize: 160, fontWeight: 800, lineHeight: 0.85, letterSpacing: '-0.05em' }}>
-          yard
+          YARD
         </div>
       </div>
     ),
