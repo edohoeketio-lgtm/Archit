@@ -105,7 +105,7 @@ export default function Hero() {
     <div ref={outerWrapperRef} className="relative w-full z-[999]">
       {/* Layer 4: Fixed Navigation & Logo (Moved OUTSIDE the pinned section so it stays forever) */}
       <div className="fixed top-0 left-0 w-full h-[100dvh] z-[999] flex flex-col justify-between p-6 md:p-12 lg:p-24 pointer-events-none">
-        <nav className="flex justify-between items-start text-sm uppercase tracking-widest pointer-events-auto">
+        <nav className="hidden md:flex justify-between items-start text-sm uppercase tracking-widest pointer-events-auto">
           <div id="global-logo-wrapper" className="relative w-24 h-24 md:w-28 md:h-28 overflow-hidden">
             <div 
               ref={logoBoxRef}
@@ -116,7 +116,7 @@ export default function Hero() {
             </div>
             <div 
               ref={greenLogoRef}
-              className="absolute inset-0 bg-[#0A3B24] text-[#E5D223] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight -translate-x-full"
+              className="absolute inset-0 bg-[#0A3B24] text-[#E5D223] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight"
             >
               <span>THE</span>
               <span>YARD</span>
@@ -234,6 +234,14 @@ export default function Hero() {
 
       {/* Mobile Native Hero */}
       <section className="relative w-full flex flex-col md:hidden bg-[#F2F0E9]">
+        {/* Mobile Logo */}
+        <div className="absolute top-0 left-0 w-full p-6 z-50 flex justify-between items-start pointer-events-none">
+          <div className="w-24 h-24 bg-[#E5D223] text-[#0A3B24] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight pointer-events-auto shadow-lg">
+            <span>THE</span>
+            <span>YARD</span>
+          </div>
+        </div>
+
         <div className="relative w-full h-[100dvh] flex flex-col justify-end px-6 pb-20">
           <div className="absolute inset-0 z-0 origin-center">
             <Image
