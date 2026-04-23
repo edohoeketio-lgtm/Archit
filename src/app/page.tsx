@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero";
-import StudioPhilosophy from "@/components/StudioPhilosophy";
 import ImageChoreography from "@/components/ImageChoreography";
 import SelectedProjects from "@/components/SelectedProjects";
 import Capabilities from "@/components/Capabilities";
@@ -11,7 +10,6 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between w-full">
       <Hero />
-      <StudioPhilosophy />
       <ImageChoreography />
       <SelectedProjects />
       <Capabilities />

@@ -21,11 +21,6 @@ export default function ImageChoreography() {
   const innerImg3Ref = useRef<HTMLImageElement>(null);
   const innerImg4Ref = useRef<HTMLImageElement>(null);
 
-  // Metadata Refs
-  const meta1Ref = useRef<HTMLDivElement>(null);
-  const meta2Ref = useRef<HTMLDivElement>(null);
-  const meta3Ref = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -39,50 +34,51 @@ export default function ImageChoreography() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=4000",
-          scrub: true,
+          end: "+=5000", // Extra long duration to allow smooth nested scrubbing
+          scrub: 1, // Slight smoothing
           pin: true,
           anticipatePin: 1,
         },
       });
 
       // --- INITIAL STATES ---
-      // Img 1 is the full background.
-      // Img 2 is the central frame.
-      gsap.set(img2Ref.current, { clipPath: "inset(25% 30% 25% 30%)", autoAlpha: 1 });
-      // Img 3 and 4 are hidden initially
-      gsap.set(img3Ref.current, { clipPath: "inset(25% 30% 25% 30%)", autoAlpha: 0 });
-      gsap.set(img4Ref.current, { clipPath: "inset(25% 30% 25% 30%)", autoAlpha: 0 });
+      // All images start as full-screen layers
+      gsap.set([img1Ref.current, img2Ref.current, img3Ref.current, img4Ref.current], { 
+        clipPath: "inset(0% 0% 0% 0%)", 
+        autoAlpha: 1 
+      });
       
-      // Initial scale for inner images to allow parallax zoom
-      gsap.set([innerImg1Ref.current, innerImg2Ref.current, innerImg3Ref.current, innerImg4Ref.current], { scale: 1 });
-      
-      // Metadata initial
-      gsap.set([meta2Ref.current, meta3Ref.current], { autoAlpha: 0 });
+      // The very last image starts slightly zoomed in so it can zoom out before leaving the section
+      gsap.set(innerImg4Ref.current, { scale: 1.2 });
 
       // --- CHOREOGRAPHY ---
-      
-      // PHASE 1: Img 1 zooms out of bounds. Img 2 expands to fill screen. Img 3 appears in center.
-      tl.to(img1Ref.current, { scale: 1.2, duration: 1, ease: "none" }, 0)
-        .to(meta1Ref.current, { autoAlpha: 0, duration: 0.3 }, 0)
-        .to(img2Ref.current, { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "none" }, 0)
-        .to(innerImg2Ref.current, { scale: 1.05, duration: 1, ease: "none" }, 0)
-        .to(meta2Ref.current, { autoAlpha: 1, duration: 0.3 }, 0.7)
-        .to(img3Ref.current, { autoAlpha: 1, duration: 0.3 }, 0.7);
+      // Target clip path for the small center box (slightly larger to match screenshot)
+      const centerBox = "inset(15% 20% 15% 20%)";
 
-      // PHASE 2: Img 2 zooms out of bounds. Img 3 expands to fill screen. Img 4 appears in center.
-      tl.to(img2Ref.current, { scale: 1.2, duration: 1, ease: "none" }, 1)
-        .to(meta2Ref.current, { autoAlpha: 0, duration: 0.3 }, 1)
-        .to(img3Ref.current, { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "none" }, 1)
-        .to(innerImg3Ref.current, { scale: 1.05, duration: 1, ease: "none" }, 1)
-        .to(meta3Ref.current, { autoAlpha: 1, duration: 0.3 }, 1.7)
-        .to(img4Ref.current, { autoAlpha: 1, duration: 0.3 }, 1.7);
+      // PHASE 1: Img 1 shrinks to center box.
+      tl.to(img1Ref.current, { clipPath: centerBox, duration: 1, ease: "none" }, 0);
+        
+      // PHASE 2: Img 1 shrinks into the distance, then fades out.
+      // Use ease: "none" to prevent the "hang" between phases.
+      tl.to(img1Ref.current, { scale: 0.05, duration: 1, ease: "none" }, 1)
+        .to(img1Ref.current, { autoAlpha: 0, duration: 0.3, ease: "none" }, 1.7);
 
-      // PHASE 3: Img 3 zooms out of bounds. Img 4 expands to fill screen.
-      tl.to(img3Ref.current, { scale: 1.2, duration: 1, ease: "none" }, 2)
-        .to(meta3Ref.current, { autoAlpha: 0, duration: 0.3 }, 2)
-        .to(img4Ref.current, { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "none" }, 2)
-        .to(innerImg4Ref.current, { scale: 1.05, duration: 1, ease: "none" }, 2);
+      // PHASE 3: Img 2 shrinks to center box.
+      tl.to(img2Ref.current, { clipPath: centerBox, duration: 1, ease: "none" }, 2);
+        
+      // PHASE 4: Img 2 shrinks into the distance, then fades out.
+      tl.to(img2Ref.current, { scale: 0.05, duration: 1, ease: "none" }, 3)
+        .to(img2Ref.current, { autoAlpha: 0, duration: 0.3, ease: "none" }, 3.7);
+
+      // PHASE 5: Img 3 shrinks to center box.
+      tl.to(img3Ref.current, { clipPath: centerBox, duration: 1, ease: "none" }, 4);
+
+      // PHASE 6: Img 3 shrinks into the distance, then fades out.
+      tl.to(img3Ref.current, { scale: 0.05, duration: 1, ease: "none" }, 5)
+        .to(img3Ref.current, { autoAlpha: 0, duration: 0.3, ease: "none" }, 5.7);
+
+      // PHASE 7: The very last image zooms out smoothly before unpinning and scrolling to next section.
+      tl.to(innerImg4Ref.current, { scale: 1, duration: 1, ease: "none" }, 6);
 
       return () => {
         tl.kill();
@@ -101,42 +97,8 @@ export default function ImageChoreography() {
         {/* Stage Container */}
         <div ref={containerRef} className="relative w-full h-full flex items-center justify-center">
           
-          {/* Layer 1: Base Exterior */}
-          <div ref={img1Ref} className="absolute inset-0 w-full h-full origin-center">
-            <Image
-              ref={innerImg1Ref}
-              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80"
-              alt="Base Exterior"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-black/10" />
-          </div>
-
-          {/* Layer 2: Interior Frame */}
-          <div ref={img2Ref} className="absolute inset-0 w-full h-full origin-center overflow-hidden">
-            <Image
-              ref={innerImg2Ref}
-              src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80"
-              alt="Interior Frame"
-              fill
-              className="object-cover"
-            />
-          </div>
-
-          {/* Layer 3: Material/Detail Crop */}
-          <div ref={img3Ref} className="absolute inset-0 w-full h-full origin-center overflow-hidden">
-            <Image
-              ref={innerImg3Ref}
-              src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80"
-              alt="Material Crop"
-              fill
-              className="object-cover"
-            />
-          </div>
-
-          {/* Layer 4: Plan/Alternate Angle */}
-          <div ref={img4Ref} className="absolute inset-0 w-full h-full origin-center overflow-hidden">
+          {/* Layer 4: Bottom-most Background */}
+          <div ref={img4Ref} className="absolute inset-0 w-full h-full origin-center overflow-hidden z-10">
             <Image
               ref={innerImg4Ref}
               src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80"
@@ -146,31 +108,48 @@ export default function ImageChoreography() {
             />
           </div>
 
+          {/* Layer 3 */}
+          <div ref={img3Ref} className="absolute inset-0 w-full h-full origin-center overflow-hidden z-20">
+            <Image
+              ref={innerImg3Ref}
+              src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80"
+              alt="Material Crop"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Layer 2 */}
+          <div ref={img2Ref} className="absolute inset-0 w-full h-full origin-center overflow-hidden z-30">
+            <Image
+              ref={innerImg2Ref}
+              src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80"
+              alt="Interior Frame"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Layer 1: Top-most Background */}
+          <div ref={img1Ref} className="absolute inset-0 w-full h-full origin-center overflow-hidden z-40">
+            <Image
+              ref={innerImg1Ref}
+              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80"
+              alt="Base Exterior"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+          </div>
+
           {/* --- METADATA ANNOTATION LAYER --- */}
-          <div className="absolute inset-0 w-full h-full pointer-events-none p-8 md:p-12 z-10 flex flex-col justify-between">
+          {/* Note: The globally fixed Logo from Hero.tsx naturally sits on top of this section since its z-index is 50 */}
+          <div className="absolute inset-0 w-full h-full pointer-events-none p-6 md:p-12 lg:p-24 z-50 flex flex-col justify-end">
             
-            {/* Top Left Branding / Fixed Title */}
-            <div className="text-white mix-blend-difference">
-              <h2 className="text-xl font-light tracking-tight">KUNSTHAUS EXPANSION</h2>
+            {/* Architect Name and Location at Bottom Right */}
+            <div className="text-white mix-blend-difference text-right pb-4">
+              <h2 className="text-xl md:text-2xl font-light tracking-tight">KUNSTHAUS EXPANSION</h2>
               <p className="text-xs opacity-70 uppercase tracking-widest mt-1">Zurich, CH</p>
-            </div>
-
-            {/* Dynamic Annotations */}
-            <div className="relative w-full h-32">
-              <div ref={meta1Ref} className="absolute bottom-0 right-0 text-right text-white mix-blend-difference">
-                <span className="text-[0.65rem] uppercase tracking-[0.2em] opacity-70 mb-1 block">01 / Exterior</span>
-                <p className="text-sm font-light">URBAN CONTEXT</p>
-              </div>
-              
-              <div ref={meta2Ref} className="absolute bottom-0 right-0 text-right text-white mix-blend-difference invisible">
-                <span className="text-[0.65rem] uppercase tracking-[0.2em] opacity-70 mb-1 block">02 / Volume</span>
-                <p className="text-sm font-light">SPATIAL CONTINUITY</p>
-              </div>
-
-              <div ref={meta3Ref} className="absolute bottom-0 right-0 text-right text-white mix-blend-difference invisible">
-                <span className="text-[0.65rem] uppercase tracking-[0.2em] opacity-70 mb-1 block">03 / Surface</span>
-                <p className="text-sm font-light">MATERIAL TACTILITY</p>
-              </div>
             </div>
 
           </div>
@@ -180,4 +159,3 @@ export default function ImageChoreography() {
     </div>
   );
 }
-
