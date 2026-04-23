@@ -117,6 +117,7 @@ export default function Hero() {
 
       tl.to(philosophyLayerRef.current, {
         y: "0vh",
+        autoAlpha: 1,
         ease: "power2.inOut",
         duration: 1.5,
       }, 0.8);
@@ -212,10 +213,10 @@ export default function Hero() {
         {/* Layer 5: Philosophy Text */}
         <div 
           ref={philosophyLayerRef} 
-          className="absolute inset-0 z-20 flex flex-col justify-end px-6 md:px-12 lg:px-24 pb-32 md:pb-48 pointer-events-none"
-          style={{ transform: "translateY(100vh)" }}
+          className="absolute inset-0 z-20 flex flex-col justify-end px-6 md:px-12 lg:px-24 pb-12 md:pb-24 pointer-events-none"
+          style={{ transform: "translateY(100vh)", visibility: "hidden", opacity: 0 }}
         >
-          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 pointer-events-auto">
+          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 pointer-events-auto">
             {/* Left Column: Heading */}
             <div className="lg:col-span-4">
               <h2 className="text-sm uppercase tracking-widest text-[#0A3B24]/70 mb-4 lg:mt-2">Manifesto of the yard</h2>
@@ -223,9 +224,9 @@ export default function Hero() {
             </div>
 
             {/* Right Column: Content */}
-            <div className="lg:col-span-8 flex flex-col gap-16">
-              <div className="text-2xl md:text-3xl lg:text-4xl font-light leading-snug tracking-tight text-[#0A3B24]">
-                <p className="mb-8">
+            <div className="lg:col-span-8 flex flex-col gap-8 md:gap-12">
+              <div className="text-xl md:text-2xl lg:text-3xl font-light leading-snug tracking-tight text-[#0A3B24]">
+                <p className="mb-6">
                   We engineer spatial narratives. Our work is the physical manifestation of context, material, and human intent—a relentless pursuit of balance between brutalist monumentality and intimate, crafted scale.
                 </p>
                 <p className="text-[#0A3B24]/80">
@@ -233,7 +234,7 @@ export default function Hero() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 border-t border-[#0A3B24]/30 text-[#0A3B24]">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-[#0A3B24]/30 text-[#0A3B24]">
                 <div className="stat-item">
                   <span className="block text-3xl font-light mb-2">24</span>
                   <span className="text-xs uppercase tracking-widest text-[#0A3B24]/70">Years of Practice</span>
