@@ -33,11 +33,11 @@ export default function Contact() {
   }, []);
 
   return (
-    <footer ref={sectionRef} id="contact" className="w-full py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-charcoal text-stone">
-      <div className="max-w-7xl mx-auto flex flex-col gap-16 md:gap-24">
+    <footer ref={sectionRef} id="contact" className="w-full pt-24 pb-12 md:pt-32 md:pb-12 px-6 md:px-12 lg:px-24 bg-charcoal text-stone">
+      <div className="max-w-7xl mx-auto flex flex-col gap-12 md:gap-16">
         
         {/* Massive Statement Heading */}
-        <div ref={contentRef} className="w-full border-b border-stone/10 pb-12 md:pb-24">
+        <div ref={contentRef} className="w-full border-b border-stone/10 pb-8 md:pb-16">
           <h2 className="text-[12vw] md:text-[9vw] lg:text-[7.5vw] leading-[0.9] tracking-tighter font-medium text-stone">
             Start a Conversation.
           </h2>
