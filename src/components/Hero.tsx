@@ -218,7 +218,7 @@ export default function Hero() {
           <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 pointer-events-auto">
             {/* Left Column: Heading */}
             <div className="lg:col-span-4">
-              <h2 className="text-sm uppercase tracking-widest text-[#0A3B24]/70 mb-4 lg:mt-2">Introduction to the yard</h2>
+              <h2 className="text-sm uppercase tracking-widest text-[#0A3B24]/70 mb-4 lg:mt-2">Manifesto of the yard</h2>
               <div className="h-px w-12 bg-[#0A3B24] mb-8"></div>
             </div>
 
@@ -226,10 +226,10 @@ export default function Hero() {
             <div className="lg:col-span-8 flex flex-col gap-16">
               <div className="text-2xl md:text-3xl lg:text-4xl font-light leading-snug tracking-tight text-[#0A3B24]">
                 <p className="mb-8">
-                  We believe architecture is the physical manifestation of context, material, and human experience. Our work seeks a balance between monumental presence and intimate scale.
+                  We engineer spatial narratives. Our work is the physical manifestation of context, material, and human intent—a relentless pursuit of balance between brutalist monumentality and intimate, crafted scale.
                 </p>
                 <p className="text-[#0A3B24]/80">
-                  Avoiding transient trends, we focus on spatial rhythm, enduring materials, and intelligent structural solutions to create spaces that mature gracefully over time.
+                  Rejecting the transient, we anchor our discipline in enduring materiality, precise structural intelligence, and rhythmic light. We don't just build structures; we forge environments that mature gracefully alongside those who inhabit them.
                 </p>
               </div>
 
