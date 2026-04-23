@@ -262,13 +262,40 @@ export default function SelectedProjects() {
         {projects.map((project, index) => (
           <div key={`mobile-${project.id}`} className="flex flex-col gap-6">
             <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden border border-[#141414]/5">
-              <Image 
-                src={project.img1} 
-                alt={`${project.name} Image 1`} 
-                fill 
-                className="object-cover" 
-                sizes="100vw"
-              />
+              {/* Swipe Hint */}
+              <div className="absolute top-4 right-4 bg-black/30 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-[10px] uppercase tracking-widest flex items-center gap-1 pointer-events-none z-10">
+                <span>Swipe</span>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
+
+              {/* Swipeable Image Container */}
+              <div 
+                className="flex w-full h-full overflow-x-auto snap-x snap-mandatory scroll-smooth relative z-0 [&::-webkit-scrollbar]:hidden"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                <div className="w-full h-full flex-none snap-center relative">
+                  <Image 
+                    src={project.img1} 
+                    alt={`${project.name} Image 1`} 
+                    fill 
+                    className="object-cover" 
+                    sizes="100vw"
+                  />
+                </div>
+                {project.img2 && (
+                  <div className="w-full h-full flex-none snap-center relative">
+                    <Image 
+                      src={project.img2} 
+                      alt={`${project.name} Image 2`} 
+                      fill 
+                      className="object-cover" 
+                      sizes="100vw"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
             <div className="flex flex-col gap-4 pt-2">
               <h3 className="text-5xl font-medium tracking-tighter leading-[0.9] text-[#141414]">{project.name}</h3>
