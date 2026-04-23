@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #F2F0E9;
+  --color-foreground: #141414;
+  --color-stone: #E5E2DA;
+  --color-concrete: #A3A099;
+  --color-charcoal: #141414;
+  
+  --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+}
+
+:root {
+  --background: #F2F0E9;
+  --foreground: #141414;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #141414;
+    --foreground: #F2F0E9;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* GSAP utilities */
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.clip-hidden {
+  clip-path: inset(100% 0 0 0);
+}
