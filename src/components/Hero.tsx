@@ -102,7 +102,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <div ref={outerWrapperRef} className="relative w-full">
+    <div ref={outerWrapperRef} className="relative w-full z-[999]">
       {/* Layer 4: Fixed Navigation & Logo (Moved OUTSIDE the pinned section so it stays forever) */}
       <div className="fixed top-0 left-0 w-full h-[100dvh] z-[999] flex flex-col justify-between p-6 md:p-12 lg:p-24 pointer-events-none">
         <nav className="flex justify-between items-start text-sm uppercase tracking-widest pointer-events-auto">

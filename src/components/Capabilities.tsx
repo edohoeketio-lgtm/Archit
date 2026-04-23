@@ -42,7 +42,7 @@ export default function Capabilities() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-[#E5D462] text-[#0A3B24]">
+    <section ref={sectionRef} className="w-full py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-[#E5D223] text-[#0A3B24]">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
         <div className="md:col-span-4">
           <h2 className="text-sm uppercase tracking-widest text-[#0A3B24]/70 mb-4">Capabilities</h2>
