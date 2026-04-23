@@ -104,7 +104,7 @@ export default function Hero() {
   return (
     <div ref={outerWrapperRef} className="relative w-full">
       {/* Layer 4: Fixed Navigation & Logo (Moved OUTSIDE the pinned section so it stays forever) */}
-      <div className="fixed top-0 left-0 w-full h-[100dvh] z-50 flex flex-col justify-between p-6 md:p-12 lg:p-24 pointer-events-none">
+      <div className="fixed top-0 left-0 w-full h-[100dvh] z-[999] flex flex-col justify-between p-6 md:p-12 lg:p-24 pointer-events-none">
         <nav className="flex justify-between items-start text-sm uppercase tracking-widest pointer-events-auto">
           <div id="global-logo-wrapper" className="relative w-24 h-24 md:w-28 md:h-28 overflow-hidden">
             <div 
