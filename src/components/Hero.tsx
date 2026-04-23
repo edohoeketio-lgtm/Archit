@@ -116,7 +116,7 @@ export default function Hero() {
             </div>
             <div 
               ref={greenLogoRef}
-              className="absolute inset-0 bg-[#0A3B24] text-[#E5D223] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight"
+              className="absolute inset-0 bg-[#0A3B24] text-[#E5D223] p-4 flex flex-col justify-end font-bold text-xl leading-none tracking-tight -translate-x-full"
             >
               <span>THE</span>
               <span>YARD</span>
@@ -233,8 +233,8 @@ export default function Hero() {
       </section>
 
       {/* Mobile Native Hero */}
-      <section className="relative w-full flex flex-col md:hidden bg-[#F2F0E9] pb-16">
-        <div className="relative w-full h-[100dvh] flex flex-col justify-between pt-32 px-6 pb-12">
+      <section className="relative w-full flex flex-col md:hidden bg-[#F2F0E9]">
+        <div className="relative w-full h-[100dvh] flex flex-col justify-end px-6 pb-20">
           <div className="absolute inset-0 z-0 origin-center">
             <Image
               src="/images/andrea-maiolo-QYPBn8jzFsg-unsplash.jpg"
@@ -243,20 +243,20 @@ export default function Hero() {
               priority
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-black/20 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#F2F0E9] via-transparent to-transparent" />
+            {/* Dark overlay for text contrast */}
+            <div className="absolute inset-0 bg-black/40" />
+            {/* Gradient to blend into the next section */}
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#F2F0E9] to-transparent" />
           </div>
 
-          <h2 className="text-[#0A3B24] relative z-20 text-left font-gilroy font-medium tracking-tighter w-full max-w-5xl mt-12 text-5xl sm:text-6xl leading-[0.85]">
+          <h2 className="text-[#E5D223] relative z-20 text-left font-gilroy font-medium tracking-tighter w-full max-w-5xl text-5xl sm:text-6xl leading-[0.85] drop-shadow-md">
             Defining Spatial<br />
             Paradigms in the<br />
             Heart of Europe
           </h2>
-
-          <div className="w-24 h-24 bg-[#E5D223] relative z-20 -ml-6 self-start mt-auto shadow-lg" />
         </div>
 
-        <div className="relative z-20 flex flex-col px-6 mt-12 text-[#0A3B24]">
+        <div className="relative z-20 flex flex-col px-6 pb-16 text-[#0A3B24] bg-[#F2F0E9]">
           <h2 className="text-sm uppercase tracking-widest text-[#0A3B24]/70 mb-4">Manifesto of The Yard</h2>
           <div className="h-px w-12 bg-[#0A3B24] mb-8"></div>
           
