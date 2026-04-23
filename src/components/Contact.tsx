@@ -43,28 +43,28 @@ export default function Contact() {
               We are currently accepting commissions for cultural, institutional, and residential projects commencing late 2026.
             </p>
             <a 
-              href="mailto:inquiries@studioarchitectura.com" 
+              href="mailto:inquiries@theyard.studio" 
               className="inline-block border-b border-stone/30 pb-1 hover:border-stone transition-colors text-sm uppercase tracking-widest"
             >
-              inquiries@studioarchitectura.com
+              inquiries@theyard.studio
             </a>
           </div>
 
           <div className="grid grid-cols-2 gap-12">
             <div>
-              <h3 className="text-xs uppercase tracking-widest text-stone/50 mb-4">Copenhagen</h3>
+              <h3 className="text-xs uppercase tracking-widest text-stone/50 mb-4">Berlin</h3>
               <address className="not-italic font-light text-sm text-stone/80 leading-relaxed">
-                Strandgade 27B<br />
-                1401 Copenhagen K<br />
-                Denmark
+                Auguststraße 43<br />
+                10119 Berlin<br />
+                Germany
               </address>
             </div>
             <div>
-              <h3 className="text-xs uppercase tracking-widest text-stone/50 mb-4">London</h3>
+              <h3 className="text-xs uppercase tracking-widest text-stone/50 mb-4">Milan</h3>
               <address className="not-italic font-light text-sm text-stone/80 leading-relaxed">
-                45 Columbia Road<br />
-                London E2 7RG<br />
-                United Kingdom
+                Via Tortona 21<br />
+                20144 Milan MI<br />
+                Italy
               </address>
             </div>
           </div>
@@ -79,7 +79,7 @@ export default function Contact() {
       </div>
 
       <div className="max-w-7xl mx-auto mt-32 pt-8 border-t border-stone/10 flex flex-col md:flex-row justify-between items-center text-xs text-stone/40">
-        <span>© {new Date().getFullYear()} Studio Architectura</span>
+        <span>© {new Date().getFullYear()} The Yard Studio</span>
         <div className="flex gap-8 mt-4 md:mt-0">
           <a href="#" className="hover:text-stone transition-colors">Privacy</a>
           <a href="#" className="hover:text-stone transition-colors">Terms</a>

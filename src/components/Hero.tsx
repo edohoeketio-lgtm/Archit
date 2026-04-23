@@ -179,12 +179,12 @@ export default function Hero() {
           <h2 className="text-[#0A3B24] text-left font-gilroy font-medium tracking-tighter w-full max-w-5xl mt-32 md:mt-48">
             <span className="block overflow-hidden pb-1 md:pb-3">
               <span ref={line1Ref} className="block text-5xl md:text-7xl lg:text-[8vw] leading-[0.85] translate-y-full opacity-0 will-change-transform">
-                Ultimate Production
+                Defining Spatial
               </span>
             </span>
             <span className="block overflow-hidden pb-1 md:pb-3">
               <span ref={line2Ref} className="block text-5xl md:text-7xl lg:text-[8vw] leading-[0.85] translate-y-full opacity-0 will-change-transform">
-                Playground in the
+                Paradigms in the
               </span>
             </span>
             <span className="block overflow-hidden pb-1 md:pb-3">
@@ -219,7 +219,7 @@ export default function Hero() {
           <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 pointer-events-auto">
             {/* Left Column: Heading */}
             <div className="lg:col-span-4">
-              <h2 className="text-sm uppercase tracking-widest text-[#0A3B24]/70 mb-4 lg:mt-2">Manifesto of the yard</h2>
+              <h2 className="text-sm uppercase tracking-widest text-[#0A3B24]/70 mb-4 lg:mt-2">Manifesto of The Yard</h2>
               <div className="h-px w-12 bg-[#0A3B24] mb-8"></div>
             </div>
 

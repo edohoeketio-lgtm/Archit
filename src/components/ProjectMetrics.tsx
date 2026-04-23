@@ -7,10 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const specifications = [
-  { value: "14,500", label: "Site Area (sqm)" },
-  { value: "8,200", label: "Gross Floor Area (sqm)" },
-  { value: "2026", label: "Target Completion" },
-  { value: "DGNB", label: "Platinum Certification" },
+  { value: "1.2M", label: "Square Meters Delivered" },
+  { value: "45", label: "Global Urban Interventions" },
+  { value: "12", label: "International Design Patents" },
+  { value: "2026", label: "Next Major Unveiling" },
 ];
 
 export default function ProjectMetrics() {
@@ -86,7 +86,7 @@ export default function ProjectMetrics() {
       <div className="relative z-20 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
         
         <div className="mb-16">
-          <h2 className="text-sm uppercase tracking-widest text-stone/50 mb-4">Project Parameters</h2>
+          <h2 className="text-sm uppercase tracking-widest text-stone/50 mb-4">Scale & Impact</h2>
           <div className="h-px w-12 bg-stone/30"></div>
         </div>
 

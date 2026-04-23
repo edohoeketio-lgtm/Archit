@@ -9,10 +9,10 @@ gsap.registerPlugin(ScrollTrigger);
 const capabilities = [
   "Architecture",
   "Interior Architecture",
-  "Urban / Masterplanning",
+  "Urban Masterplanning",
   "Adaptive Reuse",
   "Exhibition Design",
-  "Advisory / Visualization"
+  "Spatial Strategy"
 ];
 
 export default function Capabilities() {
@@ -48,7 +48,7 @@ export default function Capabilities() {
           <h2 className="text-sm uppercase tracking-widest text-[#0A3B24]/70 mb-4">Capabilities</h2>
           <div className="h-px w-12 bg-[#0A3B24]/30 mb-8"></div>
           <p className="font-light max-w-sm text-[#0A3B24]/90">
-            We work across scales and typologies, unified by a rigorous approach to material, structure, and human experience.
+            Operating at the intersection of scale and intimacy, our methodology is unified by a rigorous commitment to material integrity and structural intelligence.
           </p>
         </div>
         

@@ -9,20 +9,20 @@ gsap.registerPlugin(ScrollTrigger);
 
 const processSteps = [
   {
-    title: "Site & Context",
-    description: "Every project begins with a rigorous reading of the site. We analyze topography, climate, light, and historical context to anchor our interventions.",
+    title: "Contextual Analysis",
+    description: "Every intervention begins with a rigorous reading of the landscape. We decode topography, climate, and historical precedent to anchor our forms.",
   },
   {
-    title: "Form & Structure",
-    description: "We develop architectural massing through physical models and spatial studies, seeking clarity in form and structural logic.",
+    title: "Volumetric Studies",
+    description: "We develop architectural massing through iterative physical models and spatial calculations, seeking absolute clarity in form.",
   },
   {
-    title: "Materiality",
-    description: "Materials are selected for their tactile qualities and how they weather over time, creating an enduring dialogue with the environment.",
+    title: "Material Science",
+    description: "Materials are selected for their tectonic honesty and kinetic aging. We build with elements that forge an enduring dialogue with their environment.",
   },
   {
-    title: "Detail & Execution",
-    description: "The tectonic reality of the building is resolved through obsessive detailing, ensuring the conceptual clarity is maintained through construction.",
+    title: "Tectonic Execution",
+    description: "The conceptual purity of the building is secured through obsessive detailing. We control the narrative from the first sketch to the final concrete pour.",
   }
 ];
 

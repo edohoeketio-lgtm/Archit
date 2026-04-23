@@ -212,8 +212,8 @@ export default function ImageChoreography() {
           {/* --- METADATA ANNOTATION LAYER --- */}
           <div className="absolute inset-0 w-full h-full pointer-events-none p-6 md:p-12 lg:p-24 z-[150] flex flex-col justify-end">
             <div className="text-white mix-blend-difference text-right pb-4">
-              <h2 className="text-xl md:text-2xl font-light tracking-tight">KUNSTHAUS EXPANSION</h2>
-              <p className="text-xs opacity-70 uppercase tracking-widest mt-1">Zurich, CH</p>
+              <h2 className="text-xl md:text-2xl font-light tracking-tight">NEUE NATIONALGALERIE EXPANSION</h2>
+              <p className="text-xs opacity-70 uppercase tracking-widest mt-1">Berlin, DE</p>
             </div>
           </div>
 
