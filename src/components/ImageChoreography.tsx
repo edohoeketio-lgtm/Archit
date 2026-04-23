@@ -118,7 +118,7 @@ export default function ImageChoreography() {
     curtain.style.opacity = "0";
     curtain.style.pointerEvents = "none";
     curtain.style.backdropFilter = "blur(24px)";
-    curtain.style.WebkitBackdropFilter = "blur(24px)";
+    curtain.style.setProperty('-webkit-backdrop-filter', 'blur(24px)');
     document.body.appendChild(curtain);
 
     // 1. Cinematic 'detachment' - slightly zoom out the container
