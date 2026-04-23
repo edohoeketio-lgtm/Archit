@@ -59,7 +59,7 @@ export default function Process() {
     <section ref={sectionRef} className="w-full py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-stone text-charcoal">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 lg:gap-12 items-start">
         
-        <div className="md:col-span-5 sticky top-32">
+        <div className="md:col-span-5 relative md:sticky md:top-32">
           <h2 className="text-sm uppercase tracking-widest text-charcoal/60 mb-4">Methodology</h2>
           <div className="h-px w-12 bg-charcoal/30 mb-8"></div>
           <div className="relative aspect-[3/4] w-full max-w-sm overflow-hidden bg-charcoal/10">

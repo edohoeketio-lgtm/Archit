@@ -24,12 +24,12 @@ export default function Hero() {
   const line3Ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    // Wrap everything in gsap.context for proper cleanup of ScrollTriggers and DOM manipulations (like pin-spacers)
-    const ctx = gsap.context(() => {
+    let mm = gsap.matchMedia(outerWrapperRef);
+
+    mm.add("(min-width: 768px)", () => {
       // 1. Initial Load Animation
       gsap.set(sectionRef.current, { visibility: "visible" });
       
-      // Animate the image tag itself for the load-in, to avoid conflicting with the scrub timeline
       const imgEl = imageLayerRef.current?.querySelector("img");
       if (imgEl) {
         gsap.fromTo(
@@ -39,92 +39,65 @@ export default function Hero() {
         );
       }
 
-      // 2. Initial Setup
-      // Hide the green logo initially outside the visible area
       gsap.set(greenLogoRef.current, { xPercent: -100 });
 
-      // 3. ScrollTrigger Sequence
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=300%", // Extended for the multi-phase one-viewport sequence
+          end: "+=300%",
           pin: true,
-          scrub: 1, // Slight smoothing on the scrub
-          invalidateOnRefresh: true, // Recalculate on resize
+          scrub: 1,
+          invalidateOnRefresh: true,
         }
       });
 
-      // Ensure layout is perfectly measured after custom fonts finish loading
       if (document.fonts) {
         document.fonts.ready.then(() => {
           ScrollTrigger.refresh();
         });
       }
 
-      // Expand yellow overlay to full screen
       tl.to(yellowOverlayRef.current, {
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        ease: "power2.inOut",
+        top: 0, left: 0, width: "100%", height: "100%", ease: "power2.inOut"
       }, 0);
 
-      // Slide hero image away (targets the outer wrapper)
-      // Image remains opaque as requested
       tl.to(imageLayerRef.current, {
-        y: "-30vh",
-        ease: "power2.inOut",
+        y: "-30vh", ease: "power2.inOut"
       }, 0);
 
-      // Fade out scroll indicator
       tl.to(scrollIndicatorRef.current, {
-        opacity: 0,
-        ease: "power2.inOut",
+        opacity: 0, ease: "power2.inOut"
       }, 0);
 
-      // Masked Typography Reveal with fade in
       tl.to([line1Ref.current, line2Ref.current, line3Ref.current], {
-        y: "0%",
-        opacity: 1,
-        stagger: 0.1,
-        ease: "power3.out",
-      }, 0.2); // Start slightly after the expansion begins
+        y: "0%", opacity: 1, stagger: 0.1, ease: "power3.out"
+      }, 0.2);
 
-      // Original logo gracefully disappears immediately as yellow starts expanding
       tl.to(logoBoxRef.current, {
-        opacity: 0,
-        ease: "power2.out"
+        opacity: 0, ease: "power2.out"
       }, 0);
 
-      // Green logo slides in from the left simultaneously
       tl.fromTo(greenLogoRef.current, 
         { xPercent: -100 },
-        {
-          xPercent: 0,
-          ease: "power3.inOut"
-        }, 
+        { xPercent: 0, ease: "power3.inOut" }, 
         0.3
       );
 
-      // Phase 4: Scroll the old text up, bring the philosophy text up
       tl.to(heroLayerRef.current, {
-        y: "-100vh",
-        ease: "power2.inOut",
-        duration: 1.5,
-      }, 0.8); // Reduced pause from 1.5 to 0.8 so it doesn't feel stuck
-
-      tl.to(philosophyLayerRef.current, {
-        y: "0vh",
-        autoAlpha: 1,
-        ease: "power2.inOut",
-        duration: 1.5,
+        y: "-100vh", ease: "power2.inOut", duration: 1.5
       }, 0.8);
 
-    }, outerWrapperRef);
+      tl.to(philosophyLayerRef.current, {
+        y: "0vh", autoAlpha: 1, ease: "power2.inOut", duration: 1.5
+      }, 0.8);
+      
+      return () => {
+        tl.kill();
+      };
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
 
   }, []);
 
@@ -152,9 +125,10 @@ export default function Hero() {
         </nav>
       </div>
 
+      {/* Desktop GSAP Hero */}
       <section 
         ref={sectionRef}
-        className="relative w-full h-[100dvh] overflow-hidden visibility-hidden bg-[#F2F0E9]"
+        className="relative w-full h-[100dvh] overflow-hidden visibility-hidden bg-[#F2F0E9] hidden md:block"
       >
         {/* Layer 1: Hero Image Background */}
         <div ref={imageLayerRef} className="absolute inset-0 z-0 origin-center">
@@ -256,6 +230,64 @@ export default function Hero() {
           </div>
         </div>
 
+      </section>
+
+      {/* Mobile Native Hero */}
+      <section className="relative w-full flex flex-col md:hidden bg-[#F2F0E9] pb-16">
+        <div className="relative w-full h-[100dvh] flex flex-col justify-between pt-32 px-6 pb-12">
+          <div className="absolute inset-0 z-0 origin-center">
+            <Image
+              src="/images/andrea-maiolo-QYPBn8jzFsg-unsplash.jpg"
+              alt="The Yard"
+              fill
+              priority
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/20 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#F2F0E9] via-transparent to-transparent" />
+          </div>
+
+          <h2 className="text-[#0A3B24] relative z-20 text-left font-gilroy font-medium tracking-tighter w-full max-w-5xl mt-12 text-5xl sm:text-6xl leading-[0.85]">
+            Defining Spatial<br />
+            Paradigms in the<br />
+            Heart of Europe
+          </h2>
+
+          <div className="w-24 h-24 bg-[#E5D223] relative z-20 -ml-6 self-start mt-auto shadow-lg" />
+        </div>
+
+        <div className="relative z-20 flex flex-col px-6 mt-12 text-[#0A3B24]">
+          <h2 className="text-sm uppercase tracking-widest text-[#0A3B24]/70 mb-4">Manifesto of The Yard</h2>
+          <div className="h-px w-12 bg-[#0A3B24] mb-8"></div>
+          
+          <div className="text-xl font-light leading-snug tracking-tight">
+            <p className="mb-6">
+              We engineer spatial narratives. Our work is the physical manifestation of context, material, and human intent—a relentless pursuit of balance between brutalist monumentality and intimate, crafted scale.
+            </p>
+            <p className="text-[#0A3B24]/80">
+              Rejecting the transient, we anchor our discipline in enduring materiality, precise structural intelligence, and rhythmic light. We don't just build structures; we forge environments that mature gracefully alongside those who inhabit them.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-6 pt-8 mt-8 border-t border-[#0A3B24]/30">
+            <div className="stat-item">
+              <span className="block text-3xl font-light mb-2">24</span>
+              <span className="text-xs uppercase tracking-widest text-[#0A3B24]/70">Years of Practice</span>
+            </div>
+            <div className="stat-item">
+              <span className="block text-3xl font-light mb-2">150+</span>
+              <span className="text-xs uppercase tracking-widest text-[#0A3B24]/70">Realized Projects</span>
+            </div>
+            <div className="stat-item">
+              <span className="block text-3xl font-light mb-2">12</span>
+              <span className="text-xs uppercase tracking-widest text-[#0A3B24]/70">Global Locations</span>
+            </div>
+            <div className="stat-item">
+              <span className="block text-3xl font-light mb-2">48</span>
+              <span className="text-xs uppercase tracking-widest text-[#0A3B24]/70">Design Awards</span>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
